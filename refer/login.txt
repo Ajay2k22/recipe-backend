@@ -1,0 +1,11 @@
+==>validating the request
+
+==>email is present or not
+if not throw error
+
+==>compare password
+
+==>generate accesstoken and registertoken
+
+==>send response
+

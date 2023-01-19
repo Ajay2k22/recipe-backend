@@ -1,0 +1,19 @@
+-->validating request
+checking email,string,password,repeat_password is string
+creating schema 
+validating the req content with schema
+if error
+then throw
+
+-->check if user is already in the database
+checking email is present in the database.if found then throw error as a email 
+is already register
+
+-->store data by creating schema with hashpassword
+
+==>create acccess token
+==>create refresh_token
+==>send response acccess token,refresh_token
+
+
+
