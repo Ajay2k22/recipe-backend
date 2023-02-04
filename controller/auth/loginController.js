@@ -15,14 +15,14 @@ const loginController = {
 
         const { error } = loginSchema.validate(req.body)
         if (error) {
-            return next(error)
+            return next(new CustomErrorHandler('Wrong credentials', 401))
         }
 
         // check email is present in tha database
         try {
             const user = await User.findOne({ email: req.body.email })
             if (!user) {
-                return next(CustomErrorHandler.wrongCredentials())
+                return next(new CustomErrorHandler('Wrong Email id', 401))
             }
 
             // compare password
@@ -48,14 +48,14 @@ const loginController = {
         })
         const { error } = refreshSchema.validate(req.body)
         if (error) {
-            next(new CustomErrorHandler('refresh_token error',401))
+            return next(new CustomErrorHandler('refresh_token error', 401))
         }
         try {
             await RefreshToken.deleteOne({ token: req.body.refresh_token })
         } catch (e) {
-            next(CustomErrorHandler('Something went wrong in the database'))
+            return next(new CustomErrorHandler('refresh token delete error',401))
         }
-        res.json({status:1})
+        res.json({ status: 1 })
     }
 }
 export default loginController

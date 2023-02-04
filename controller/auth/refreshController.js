@@ -26,19 +26,20 @@ const refreshController = {
             try {
                 const { _id } = JwtService.Verify(refresh_token.token, REFRESH_SECRET)
                 UserId = _id
-                
+                await User.findOne({token: refresh_token}).remove().exec();
+
             } catch (e) {
                 return next(CustomErrorHandler.unAuthorized('Invalid refresh code'))
             }
-
+            
             const user = await User.findOne({ _id: UserId })
             console.log(user)
             if (!user) {
                 return next(CustomErrorHandler.unAuthorized('No user Found'))
             }
-
+            await RefreshToken.findOneAndRemove({})
             const access_token = JwtService.Sign({ _id: user._id, role: user.role })
-            refresh_token = JwtService.Sign({ _id:  user._id, role: user.role }, '1y', REFRESH_SECRET)
+            refresh_token = JwtService.Sign({ _id: user._id, role: user.role }, '1y', REFRESH_SECRET)
             await RefreshToken.create({ token: refresh_token })
             res.json({ access_token, refresh_token })
 

@@ -3,7 +3,7 @@ import JwtService from '../../services/JwtService.js';
 import CustomErrorHandler from '../../services/CustomErrorHandler.js';
 import { REFRESH_SECRET } from '../../config/index.js';
 import bcrypt from "bcrypt";
-import { User,RefreshToken } from '../../models/index.js';
+import { User, RefreshToken } from '../../models/index.js';
 
 const registerController = {
     async register(req, res, next) {
@@ -54,16 +54,13 @@ const registerController = {
 
             // Token
             access_token = JwtService.Sign({ _id: result._id, role: result.role })
-            refresh_token = JwtService.Sign({ _id: result._id, role: result.role },'1y',REFRESH_SECRET)
-            await RefreshToken.create({token:refresh_token})
+            refresh_token = JwtService.Sign({ _id: result._id, role: result.role }, '1y', REFRESH_SECRET)
+            await RefreshToken.create({ token: refresh_token })
         }
         catch (e) {
-            next(CustomErrorHandler('unable to save', 500))
+            return next(new CustomErrorHandler('unable to save', 500))
         }
-
-
-        return res.json({ access_token,refresh_token })
-
+        return res.json({ access_token, refresh_token })
     }
 }
 
