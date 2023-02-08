@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
+import { DB } from "../config";
+
 export const connectDB = async () => {
     try {
         mongoose.set('strictQuery', false);
-        await mongoose.connect(`mongodb://127.0.0.1:27017/recipe`)
+        await mongoose.connect(DB)
         console.log('Database connected sucessfully')
+
+
+
+
     }
     catch (error) {
         console.log(error)
