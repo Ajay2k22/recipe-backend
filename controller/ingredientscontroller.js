@@ -1,5 +1,5 @@
 import CustomErrorHandler from "../services/CustomErrorHandler.js";
-import { Ingredient } from "../models/Ingredients.js"
+import { Ingredient } from "../models/ingredients.js"
 
 const Ingredientcontroller = {
 
