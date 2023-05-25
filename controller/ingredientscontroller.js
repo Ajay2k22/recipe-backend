@@ -2,23 +2,7 @@ import CustomErrorHandler from "../services/CustomErrorHandler.js";
 import { Ingredient } from "../models/ingredients.js"
 
 const Ingredientcontroller = {
-
-
-
-    async Ingredientcontrollnew(req, res, next) {
-        try {
-            console.log(req.body)
-            const created = await Ingredient.create(req.body);
-            console.log(created)
-            res.status(200).json({
-                success: true,
-                msg: 'Ingredient created'
-            })
-        }
-        catch (error) {
-            return next(new CustomErrorHandler(error, 404))
-        }
-    },
+   
 
     async Ingredientcontrollfetch(req, res, next) {
         try {
@@ -78,40 +62,8 @@ const Ingredientcontroller = {
         }
     },
 
-    async Ingredientcontrollupdate(req, res, next) {
-        try {
-            const fetch = await Ingredient.findById(req.params.id)
-            const Ingredient = await Ingredient.findByIdAndUpdate(req.params.id, req.body, {
-                new: true,
-                useFindAndModify: true,
-                runValidators: true
-            })
-            console.log(req.body)
-            console.log(Ingredient)
+    
 
-            res.status(200).json({
-                success: true,
-                msg: "updated sucessfully"
-            })
-        } catch (e) {
-            return next(new CustomErrorHandler(e, 404))
-        }
-
-    },
-
-    async IngredientcontrollDelete(req, res) {
-        try {
-            const Ingredient = await Ingredient.findById(req.params.id)
-            await Ingredient.remove()
-
-            res.status(200).json({
-                success: true,
-                msg: "Deleted Sucesssully"
-            })
-        }
-        catch (e) {
-            return next(new CustomErrorHandler(e, 404))
-        }
-    }
+    
 }
 export default Ingredientcontroller

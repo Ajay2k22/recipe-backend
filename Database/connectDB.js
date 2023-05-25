@@ -6,12 +6,9 @@ export const connectDB = async () => {
         mongoose.set('strictQuery', false);
         await mongoose.connect(DB)
         console.log('Database connected sucessfully')
-
-
-
-
     }
     catch (error) {
+        // database connection error
         console.log(error)
     }
 }

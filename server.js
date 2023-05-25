@@ -10,7 +10,6 @@ import { connectDB } from './Database/connectDB.js';
 import path from 'path'
 import ingredientrouter from './routes/ingredients.js'
 
-
 global.appRoot = path.resolve(__dirname)
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -27,6 +26,6 @@ app.use('/uploads',express.static('uploads'))
 app.use(errorHandler)
 // server creation
 app.listen(APP_PORT, (req, res) => {
-    console.log(`Server is Created at http://localhost:3000`)
+    console.log(`Server is Created`)
 })
 

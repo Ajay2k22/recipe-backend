@@ -2,9 +2,6 @@ import CustomErrorHandler from "../services/CustomErrorHandler.js";
 import { Comment } from "../models/comments.js"
 
 const Commentcontroller = {
-
-
-
     async commentcontrollnew(req, res, next) {
         try {
             console.log(req.body)
@@ -31,11 +28,11 @@ const Commentcontroller = {
             return next(new CustomErrorHandler(error, 404))
         }
     },
+
     async commentcontrollfetchslugid(req, res, next) {
         try {
             let mydata = req.params.id
             const data = await Comment.find({ id: mydata })
-
             if (data.length != 0) {
                 res.status(200).json({
                     success: "true",
@@ -43,7 +40,6 @@ const Commentcontroller = {
                     length: data.length
                 })
             }
-
             else {
                 res.status(201).json({
                     success: "false",
@@ -66,7 +62,6 @@ const Commentcontroller = {
                     data: data
                 })
             }
-
             else {
                 res.status(201).json({
                     success: "false",
@@ -77,8 +72,6 @@ const Commentcontroller = {
             return next(new CustomErrorHandler(error, 404))
         }
     },
-
-
     async commentcontrollDelete(req, res) {
         try {
             const comment = await Comment.findById(req.params.id)
